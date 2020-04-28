@@ -8,6 +8,11 @@
     android:background="@color/bgHome"
     tools:context=".MainActivity">
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/buttonregister"
@@ -64,6 +69,7 @@
         android:layout_marginTop="164dp"
         android:background="@drawable/shapetextfield"
         android:hint="Phone Number"
+        android:inputType="phone"
         android:paddingLeft="15dp"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,6 +88,7 @@
         android:hint="Email"
         android:paddingLeft="15dp"
         android:textColor="#ffffff"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
