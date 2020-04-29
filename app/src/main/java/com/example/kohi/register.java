@@ -28,7 +28,8 @@ public class register extends AppCompatActivity {
     private EditText fullname, username, password, phonenumber, email;
     private Button buttonregister;
     private ProgressBar loading;
-    private static  String URL_REGIST = "http://192.168.100.11/kohi_backend/register.php";
+    private static  String URL_REGIST = "http://localhost/kohi_backend/register.php";
+    String success;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,6 @@ public class register extends AppCompatActivity {
         loading = findViewById(R.id.loading);
         fullname = findViewById(R.id.fullname);
         username = findViewById(R.id.username);
-        phonenumber = findViewById(R.id.phonenumber);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         buttonregister = findViewById(R.id.buttonregister);
@@ -56,11 +56,10 @@ public class register extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         buttonregister.setVisibility(View.GONE);
 
-        final String fullname = this.fullname.getText().toString().trim();
-        final String username = this.username.getText().toString().trim();
-        final String phonenumber = this.phonenumber.getText().toString().trim();
-        final  String email = this.email.getText().toString().trim();
-        final String password = this.password.getText().toString().trim();
+        final String namalengkap = this.fullname.getText().toString().trim();
+        final String usrname = this.username.getText().toString().trim();
+        final  String mEmail = this.email.getText().toString().trim();
+        final String passwrd = this.password.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
@@ -68,18 +67,18 @@ public class register extends AppCompatActivity {
                     public void onResponse(String response) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String success = jsonObject.getString("success");
+                        success = jsonObject.optString("success");
 
                         if (success.equals("1")) {
                             Toast.makeText(register.this, "Register Success!", Toast.LENGTH_SHORT).show();
                         }
 
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(register.this, "Register Error!" + e.toString(), Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         buttonregister.setVisibility(View.VISIBLE);
-                    }
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -96,11 +95,10 @@ public class register extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("fullname", fullname);
-                params.put("username", username);
-                params.put("phonenumber", phonenumber);
-                params.put("email", email);
-                params.put("password", password);
+                params.put("fullname", namalengkap);
+                params.put("username", usrname);
+                params.put("email", mEmail);
+                params.put("password", passwrd);
                 return params;
             }
         };

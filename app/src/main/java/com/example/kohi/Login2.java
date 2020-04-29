@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 
 public class Login2 extends AppCompatActivity {
-private TextView register;
-private EditText username;
-private EditText password;
-private Button  butonlogin;
+    private TextView register;
+    private EditText username;
+    private EditText password;
+    private Button  butonlogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
