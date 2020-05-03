@@ -8,12 +8,6 @@
     android:background="@color/bgHome"
     tools:context=".MainActivity">
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
-
     <Button
         android:id="@+id/buttonregister"
         android:layout_width="115dp"
@@ -48,23 +42,6 @@
         app:layout_constraintVertical_bias="0.043" />
 
     <EditText
-        android:id="@+id/username"
-        android:layout_width="284dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="164dp"
-        android:background="@drawable/shapetextfield"
-        android:hint="Username"
-        android:paddingLeft="15dp"
-        android:textColor="#ffffff"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147" />
-
-    <EditText
         android:id="@+id/phonenumber"
         android:layout_width="284dp"
         android:layout_height="37dp"
@@ -79,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.249" />
+        app:layout_constraintVertical_bias="0.154" />
 
     <EditText
         android:id="@+id/email"
@@ -88,15 +65,15 @@
         android:layout_marginTop="164dp"
         android:background="@drawable/shapetextfield"
         android:hint="Email"
+        android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
         android:textColor="#ffffff"
-        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintVertical_bias="0.264" />
 
     <EditText
         android:id="@+id/password"
@@ -113,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.367" />
 
     <ImageView
         android:layout_width="823dp"
@@ -129,6 +106,16 @@
         app:layout_constraintVertical_bias="0.115"
         tools:visibility="visible" />
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="107dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="222dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/texthome"
         android:layout_width="wrap_content"
@@ -143,7 +130,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.097" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

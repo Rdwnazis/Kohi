@@ -27,7 +27,7 @@
         android:layout_width="140dp"
         android:layout_height="36dp"
         android:background="@drawable/button"
-        android:text="Continue to App Without Login"
+        android:text="Login as Guest"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="13sp"

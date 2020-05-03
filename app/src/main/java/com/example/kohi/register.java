@@ -2,6 +2,7 @@ package com.example.kohi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +26,10 @@ import java.util.Map;
 
 public class register extends AppCompatActivity {
 
-    private EditText fullname, username, password, phonenumber, email;
+    private EditText fullname, password, phonenumber, email;
     private Button buttonregister;
     private ProgressBar loading;
-    private static  String URL_REGIST = "http://localhost/kohi_backend/register.php";
+    private static  String URL_REGIST = "http://192.168.100.11/kohi_backend/register.php";
     String success;
 
     @Override
@@ -38,7 +39,7 @@ public class register extends AppCompatActivity {
 
         loading = findViewById(R.id.loading);
         fullname = findViewById(R.id.fullname);
-        username = findViewById(R.id.username);
+        phonenumber = findViewById(R.id.phonenumber);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         buttonregister = findViewById(R.id.buttonregister);
@@ -56,10 +57,10 @@ public class register extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         buttonregister.setVisibility(View.GONE);
 
-        final String namalengkap = this.fullname.getText().toString().trim();
-        final String usrname = this.username.getText().toString().trim();
-        final  String mEmail = this.email.getText().toString().trim();
-        final String passwrd = this.password.getText().toString().trim();
+        final String fullname = this.fullname.getText().toString().trim();
+        final String phonenumber = this.phonenumber.getText().toString().trim();
+        final  String email = this.email.getText().toString().trim();
+        final String password = this.password.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
@@ -71,6 +72,7 @@ public class register extends AppCompatActivity {
 
                         if (success.equals("1")) {
                             Toast.makeText(register.this, "Register Success!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(register.this, Login2.class));
                         }
 
                     } catch (JSONException e) {
@@ -95,10 +97,10 @@ public class register extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("fullname", namalengkap);
-                params.put("username", usrname);
-                params.put("email", mEmail);
-                params.put("password", passwrd);
+                params.put("fullname", fullname);
+                params.put("phonenumber", phonenumber);
+                params.put("email", email);
+                params.put("password", password);
                 return params;
             }
         };

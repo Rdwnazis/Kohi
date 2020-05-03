@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class login1 extends AppCompatActivity {
-    private Button buttonlogin;
+    private Button buttonlogin, buttonnotlogin;
     private long backPressedTime;
     private Toast backToast;
     @Override
@@ -25,7 +25,21 @@ public class login1 extends AppCompatActivity {
 
             }
         });
+
+        buttonnotlogin = findViewById(R.id.buttonnotlogin);
+        buttonnotlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomenotuser();
+            }
+        });
     }
+
+    private void openHomenotuser() {
+        Intent intent = new Intent(this, homenonuser.class);
+        startActivity(intent);
+    }
+
     public void openLogin2() {
         Intent intent = new Intent(this, Login2.class);
         startActivity(intent);
