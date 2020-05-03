@@ -1,16 +1,15 @@
 <?php
-
     if ($_SERVER['REQUEST_METHOD'] =='POST'){
-        $namaLengkap = $_POST['fullname'];
-        $usrname = $_POST['username'];
-        $mEmail = $_POST['email'];
-        $passwrd = $_POST['password'];
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        $phonenumber = $_POST['phonenumber'];
+        $password = $_POST['password'];
 
-        $passwrd = password_hash($passwrd, PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
         require_once 'connect.php';
-
-        $sql = "INSERT INTO user (namaLengkap, usrname, mEmail, passwrd) VALUES ('$namaLengkap', '$usrname', '$mEmail', '$passwrd')";
+        
+        $sql = "INSERT INTO user (fullname, email, phonenumber, password) VALUES ('$fullname', '$email', '$phonenumber', '$password')";
 
         if(mysqli_query($conn, $sql) ){
             $result["success"] = "1";
@@ -18,14 +17,15 @@
 
             echo json_encode($result);
             mysqli_close($conn);
-
         } else{
-
             $result["success"] = "0";
             $result["message"] = "error";
 
             echo json_encode($result);
             mysqli_close($conn);
         }
+
+
     }
+
 ?>
