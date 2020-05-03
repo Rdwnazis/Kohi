@@ -1,7 +1,7 @@
 package com.example.kohi;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,20 +26,29 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.prefs.Preferences;
 
 
 public class Login2 extends AppCompatActivity {
     private TextView register;
     private EditText email, password;
+    private long backPressedTime;
+    private Toast backToast;
     private Button  butonlogin;
     private ProgressBar loading;
     private static String URL_LOGIN = "http://192.168.100.11/kohi_backend/login.php";
 
 
+    private static final String TAG = Login2.class.getSimpleName();
+
+    SharedPreferences pref;
+    Preferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +79,29 @@ public class Login2 extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(Prefrences.getLoggedInStatus(getBaseContext())){
+            startActivity(new Intent(this, home.class));
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+        } else {
+            backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
+    }
     private void login(final String email, final String password) {
+        Prefrences.setLoggedInStatus(getBaseContext(),true);
         loading.setVisibility(View.VISIBLE);
         butonlogin.setVisibility(View.GONE);
 
