@@ -1,14 +1,48 @@
-<?php 
-require "conn.php";
-$user_name = $_POST[ "user_name" ];
-$user_pass = $_POST[ "passwrd" ];
-$mysql_qry = "select * from user where username like '$user_name' and password like '$user_pass';";
-$result = mysqli_query($conn ,$mysql_qry);
-if(mysqli_num_rows($result) > 0) {
-echo "login success !!!!! Welcome user";
+<?php
+
+if ($_SERVER['REQUEST_METHOD']=='POST') {
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    require_once 'connect.php';
+
+    $sql = "SELECT * FROM user WHERE email='$email' ";
+
+    $response = mysqli_query($conn, $sql);
+
+    $result = array();
+    $result['login'] = array();
+    
+    if ( mysqli_num_rows($response) === 1 ) {
+        
+        $row = mysqli_fetch_assoc($response);
+
+        if ( password_verify($password, $row['password']) ) {
+            
+            $index['email'] = $row['email'];
+            $index['id'] = $row['id'];
+
+            array_push($result['login'], $index);
+
+            $result['success'] = "1";
+            $result['message'] = "success";
+            echo json_encode($result);
+
+            mysqli_close($conn);
+
+        } else {
+
+            $result['success'] = "0";
+            $result['message'] = "error";
+            echo json_encode($result);
+
+            mysqli_close($conn);
+
+        }
+
+    }
+
 }
-else {
-echo "login not success";
-}
- 
+
 ?>
